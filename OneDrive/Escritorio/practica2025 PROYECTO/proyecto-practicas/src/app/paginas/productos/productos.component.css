@@ -8,10 +8,14 @@
     padding: 20px;
 }
 /*estilos para las tarjetas*/
+.front-control{
+  border-radius: 5px;
+  border: none;
+}
 .card{
     width: 18rem;
-    background-color: rgb(255, 255, 255);
-    color: rgb(0, 0, 0);
+    
+    
     border-radius: 10px;
     overflow: hidden;
     transition: transform 0.1 ease-in-out;
@@ -62,7 +66,7 @@
 
 .botonDC{
     border: none;
-    background-color: none;
+    
     margin: 5px;
     color: blue;
 }
@@ -90,9 +94,12 @@ select{
 .filtros{
   width: 100%;
   display: flex;
-   background-color: white;
+  
    height: 70px;
  
+}
+.sinproducfil{
+  color: black;
 }
 .row{
   height: 70px;

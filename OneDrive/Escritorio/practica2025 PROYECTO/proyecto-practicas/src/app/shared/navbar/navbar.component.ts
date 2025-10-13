@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { BuscadorService } from '../../servicios/buscador.service';
 
 
 @Component({
@@ -23,5 +24,12 @@ export class NavbarComponent {
       }
     }
   }
+  constructor(private buscadorService: BuscadorService) {}
+
+  onBuscar(event: any) {
+    const valor = event.target.value;
+    this.buscadorService.setFiltro(valor);
+  }
+  
   
 }

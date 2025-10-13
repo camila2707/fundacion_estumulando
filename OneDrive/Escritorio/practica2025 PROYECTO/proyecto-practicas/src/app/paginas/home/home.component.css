@@ -208,7 +208,8 @@
   width: 20rem;
   background-color: rgb(255, 255, 255);
   color: rgb(126, 126, 126);
- 
+ border-radius: 5px;
+ border: none;
   overflow: hidden;
  
   height: auto;

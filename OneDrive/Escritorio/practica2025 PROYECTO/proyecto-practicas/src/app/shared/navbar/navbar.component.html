@@ -18,8 +18,13 @@
         type="search"
         placeholder="Buscar"
         aria-label="Search"
+       (input)="onBuscar($event)"
       />
-      <button class="btn btn-outline" type="submit">Buscar</button>
+      <button class="btn btn-outline" type="submit" >Buscar</button>
+      <!-- <form class="search-form">
+                    <input type="text" name="text" placeholder="Buscar" oninput="filtrarPorBuscador(value)">
+                    <button>Buscar</button>
+                </form>-->
     </form>
     <a class="btn" routerLink="/favoritos">
       <i class="fa-solid fa-star"></i>

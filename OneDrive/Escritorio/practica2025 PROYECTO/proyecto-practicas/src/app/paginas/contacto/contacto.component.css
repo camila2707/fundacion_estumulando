@@ -12,13 +12,18 @@
 .contenedor-contacto {
   width: 30%;
 
-  color: black;
+  
   height: 100%;
   text-align: center;
 }
+input{
+  border-radius: 5px;
+  border: none;
+  
+}
 .contenedor-formulario {
   width: 70%;
-  color: black;
+  
   overflow: hidden;
   border-radius: 10px;
 

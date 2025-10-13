@@ -15,8 +15,7 @@ h1{
 /*estilos para las tarjetas*/
 .card{
     width: 18rem;
-    background-color: rgb(255, 255, 255);
-    color: rgb(0, 0, 0);
+    
     border-radius: 10px;
     overflow: hidden;
     transition: transform 0.1 ease-in-out;

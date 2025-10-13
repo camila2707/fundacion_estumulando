@@ -6,11 +6,12 @@ import { RouterModule } from '@angular/router';
 import { FavoritoService } from '../../servicios/favorito.service';
 import { OfertasService } from '../../servicios/ofertas.service';
 import { FormsModule } from '@angular/forms';
+import { BuscadorService } from '../../servicios/buscador.service';
 
 @Component({
   selector: 'app-productos',
   standalone: true,
-  imports: [CommonModule, RouterModule,FormsModule],
+  imports: [CommonModule, RouterModule, FormsModule],
   templateUrl: './productos.component.html',
   styleUrl: './productos.component.css'
 })
@@ -20,10 +21,10 @@ export class ProductosComponent implements OnInit {
   Productos: Productos[] = [
     {
       id: 1,
-      nombre: 'Taladro Percutor Luxus 13mm 850w Kit Con Accesorios 220v Color Naranja Frecuencia 50hz',
+      nombre: 'Taladro Percutor Luxus 13mm 850w ',
       descripcion: 'Con una capacidad de mandril de 13 mm y una velocidad máxima de rotación de 2700 rpm, este taladro es perfecto para perforar en diferentes materiales, desde madera hasta metal.',
       precio: 98568,
-      img: './assets/taladro1.webp',
+      img: './assets/taladro1.png',
       disponibilidad: true,
       categoria: 'Herramienta Electricas e Inalambricas',
       oferta: 0,
@@ -34,10 +35,10 @@ export class ProductosComponent implements OnInit {
 
     {
       id: 2,
-      nombre: 'Amoladora Angular 115mm TOTAL Uso Profesional 750w Ergonónica, Potente y Resistente',
+      nombre: 'Amoladora Angular 115mm TOTAL Uso Profesional',
       descripcion: 'Amoladora Angular Total Tools 750W Monofásica Para Disco 115 Mm con Mango Auxiliar y Velocidad Máxima de 11000 RPM. Diseñada para alto rendimiento en aplicaciones profesionales y con calidad para uso industrial.',
       precio: 55811,
-      img: './assets/amoladora2.webp',
+      img: './assets/amoladora2.png',
       disponibilidad: true,
       categoria: 'Herramienta Electricas e Inalambricas',
       oferta: 0,
@@ -50,7 +51,7 @@ export class ProductosComponent implements OnInit {
       nombre: 'Martillo Carpintero 450 Gr Total Industrial',
       descripcion: 'El Martillo Carpintero Galponero 450g 16oz Fibra D Vidrio Total es una herramienta esencial para cualquier carpintero, aficionado al bricolaje o profesional de la construcción. Con un peso de 16 oz y un largo de 32.5 cm, este martillo es perfecto para una variedad de tareas, desde clavar clavos hasta romper objetos.',
       precio: 9399,
-      img: './assets/martillo3.webp',
+      img: './assets/martillo3.png',
       disponibilidad: true,
       categoria: 'Herramientas Manuales',
       oferta: 0,
@@ -60,10 +61,10 @@ export class ProductosComponent implements OnInit {
     },
     {
       id: 4,
-      nombre: 'Destornilladores Aislados Brinna 12 En 1 Estuche 1000v',
+      nombre: 'Destornilladores Aislados Brinna 12 En 1 ',
       descripcion: 'SET DESTORNILLADORES AISLADOS 1000V 12 EN 1 MANGO INTERCAMBIABLE Y ESTUCHE HB-60 BRINNA',
       precio: 37756,
-      img: './assets/destornilladores.webp',
+      img: './assets/destornilladores.png',
       disponibilidad: true,
       categoria: 'Herramientas Manuales',
       oferta: 0,
@@ -73,10 +74,10 @@ export class ProductosComponent implements OnInit {
     },
     {
       id: 5,
-      nombre: 'Juego Kit Set Destornillador Precisión Denver 145 Piezas Cel',
+      nombre: 'Juego Kit Set Destornillador Precisión Denver 145 Piezas',
       descripcion: 'DESTORNILLADOR DE PRECISIÓN INTERCAMBIABLE CON ESTUCHE RIGIDO IDEAL REPARACION DE CELULAR, COMPUTADORAS, CÁMARAS Y JOYERIA DENVER (DVP145)',
       precio: 64524,
-      img: './assets/destornilladores5.webp',
+      img: './assets/destornilladores5.png',
       disponibilidad: true,
       categoria: 'Herramientas Manuales',
       oferta: 10,
@@ -86,10 +87,10 @@ export class ProductosComponent implements OnInit {
     },
     {
       id: 6,
-      nombre: 'Sierra Circular Bosch Gks 150 71/4 1500w con disco y guía incluidos',
+      nombre: 'Sierra Circular Bosch Gks 150 71/4 1500w',
       descripcion: 'La Sierra Circular Bosch GKS 150, con 1500W de potencia, tiene la fuerza y robustez suficiente para aplicaciones pesadas, ya sea en obras o talleres. Es ideal para cortes profundos y cortes en madera dura. Cuenta con recurso contra bloqueo para más seguridad, además de empuñadura auxiliar lo que garantiza más estabilidad durante el corte. El polvo se mantiene lejos del usuario gracias a su salida de polvo eficiente. Las escobillas de carbón son fácilmente accedidas, permitiendo que su cambio sea simple y fácil.',
       precio: 207456,
-      img: './assets/sierraelectrica6.webp',
+      img: './assets/sierraelectrica6.png',
       disponibilidad: true,
       categoria: 'Herramienta Electricas e Inalambricas',
       oferta: 0,
@@ -99,10 +100,10 @@ export class ProductosComponent implements OnInit {
     },
     {
       id: 7,
-      nombre: 'Soldadora Inverter Lusqtoff MegaIron100-8 Mascara Escuadras Magneticas Naranja/negro 220v 50hz',
+      nombre: 'Soldadora Inverter Lusqtoff MegaIron100-8 ',
       descripcion: 'Tipo de soldadora: MMA. Intensidad de soldadura mínima de 10A. Intensidad de soldadura máxima de 105A. Accesorio incluido:2 escuadras.',
       precio: 133423,
-      img: './assets/soldadora7.webp',
+      img: './assets/soldadora7.png',
       disponibilidad: true,
       categoria: 'Herramienta Electricas e Inalambricas',
       oferta: 0,
@@ -115,7 +116,7 @@ export class ProductosComponent implements OnInit {
       nombre: 'Sierra Caladora Dewalt Dwe300 Portátil De 650w',
       descripcion: 'Sierra Caladora Dewalt Dwe300-b3 Portátil De 650w- Herramienta eléctrica portátil para cortes precisos en diversos materiales.- Potencia de 650W, ideal para trabajos exigentes.- Diseño ergonómico que facilita su manejo y reduce la fatiga durante el uso prolongado.- Velocidad variable que permite un control óptimo en diferentes tipos de corte.- Sistema de cambio rápido de hojas sin necesidad de herramientas adicionales.- Capacidad de biselado de 0 a 45 grados para cortes angulares.- Incluye adaptador para aspiración de polvo, manteniendo el área de trabajo limpia.',
       precio: 160575,
-      img: './assets/caladora8.webp',
+      img: './assets/caladora8.png',
       disponibilidad: true,
       categoria: 'Herramienta Electricas e Inalambricas',
       oferta: 15,
@@ -125,10 +126,10 @@ export class ProductosComponent implements OnInit {
     },
     {
       id: 9,
-      nombre: 'Compresor de aire eléctrico portátil Lüsqtoff LC-2025 monofásico 25L 2hp 220V 50Hz naranja',
+      nombre: 'Compresor de aire eléctrico portátil Lüsqtoff LC-2025',
       descripcion: 'Con tu Lüsqtoff LC-2025, las tareas manuales que requieran presión de aire serán mucho más sencillas. Ahorrá tiempo y lográ excelentes resultados sin esfuerzo.',
       precio: 253899,
-      img: './assets/compresor9.webp',
+      img: './assets/compresor9.png',
       disponibilidad: true,
       categoria: 'Herramienta Electricas e Inalambricas',
       oferta: 0,
@@ -138,10 +139,10 @@ export class ProductosComponent implements OnInit {
     },
     {
       id: 10,
-      nombre: 'Amoladora Recta 710w 220v + Accesorios Lüsqtoff Arl710-8 Color Naranja Frecuencia 50 Hz',
+      nombre: 'Amoladora Recta 710w 220v + Accesorios Lüsqtoff',
       descripcion: 'La amoladora Lüsqtoff es una herramienta versátil, que permite realizar diferentes trabajos con una terminación profesional. Por eso, es una excelente opción sumarla a tu taller o caja de herramientas.',
       precio: 145952,
-      img: './assets/amoladorarecta10.webp',
+      img: './assets/amoladorarecta10.png',
       disponibilidad: true,
       categoria: 'Herramienta Electricas e Inalambricas',
       oferta: 0,
@@ -151,10 +152,10 @@ export class ProductosComponent implements OnInit {
     },
     {
       id: 11,
-      nombre: 'Maza De Goma Wadfow Martillo 900grs Mango De Fibra Whm7307',
+      nombre: 'Maza De Goma Wadfow Martillo 900grs',
       descripcion: ' Fabricada con materiales de alta calidad, la cabeza de goma garantiza un impacto efectivo sin dañar las superficies, mientras que el mango ergonómico de fibra proporciona un agarre seguro y cómodo durante horas de uso continuo',
       precio: 7304,
-      img: './assets/maza11.webp',
+      img: './assets/maza11.png',
       disponibilidad: true,
       categoria: 'Herramientas Manuales',
       oferta: 0,
@@ -167,7 +168,7 @@ export class ProductosComponent implements OnInit {
       nombre: 'Juego Llaves Torx 9 Piezas T 10 A T 50 Cortas Blister',
       descripcion: 'Resistentes y Duraderos • Ideal, para: Automóviles, Motos, Sistemas de Freno de Bicicleta, Discos Duros, Garage, Muebles, Hogar, Sistemas de Ordenador y Electrónica de Consumo, etc.',
       precio: 3685,
-      img: './assets/juegodellaves12.webp',
+      img: './assets/juegodellaves12.png',
       disponibilidad: true,
       categoria: 'Herramientas Manuales',
       oferta: 10,
@@ -177,10 +178,10 @@ export class ProductosComponent implements OnInit {
     },
     {
       id: 13,
-      nombre: 'Caja JIN Feng jf-1046 Set Herramientas Juego Llave Tubo Kit 46 Piezas Estuche',
+      nombre: 'Caja JIN Feng jf-1046 Set Herramientas',
       descripcion: "Set Caja Herramientas Juego Llave Tubo Kit 46 Piezas Estuche:* Estuche Organizador Plástico.* Llave Cricket Reversible.* Incluye todo encastres 1/4:Llaves allen 1.5mm, 2mm, 2.5mm.*Movimiento en ángulo.*Barras extensión 2'' y 4''.*Extension flexible 6'' (resorte flexible permite trabajar en lugares difíciles).*Llave de fuerza.*Agarre tipo destornillador para los bits.*Adaptador para bits standard.* 13 Tubos incluidos:4mm, 4.5mm, 5mm, 5.5mm, 6mm, 7mm, 8mm, 9mm, 10mm, 11mm, 12mm, 13mm,14mm.* 21 puntas bits incluidas:*PARKER 4, 5.5, 7*PHILIPS 1, 2, 3*POZIDRIVE 1, 2, 3*ALLEN 3, 4, 5, 6, 7, 8*TORK 10, 15, 20, 25, 30, 40 ",
       precio: 11999,
-      img: './assets/juegodellaves13.webp',
+      img: './assets/juegodellaves13.png',
       disponibilidad: true,
       categoria: 'Herramientas Manuales',
       oferta: 0,
@@ -190,10 +191,10 @@ export class ProductosComponent implements OnInit {
     },
     {
       id: 14,
-      nombre: 'Mini Motosierra Inalambrica 20v De Mano Daewoo Dalmch20 Color Naranja/Negro/Gris',
+      nombre: 'Mini Motosierra Inalambrica 20v De Mano',
       descripcion: 'La motosierra de mano DALMCH20-1K a batería de 20 V es compacta y potente, ideal para cortes precisos y rápidos en madera de hasta 90 mm de grosor. Con una velocidad sin carga de 3000 rpm y una longitud de espada de 4" (102 mm), ofrece un rendimiento excepcional en un diseño ligero de solo 1 kg. Perfecta para tareas de jardinería y mantenimiento, combina eficiencia y facilidad de uso.',
       precio: 81817,
-      img: './assets/minimotosierra14.webp',
+      img: './assets/minimotosierra14.png',
       disponibilidad: true,
       categoria: 'Herramienta Electricas e Inalambricas',
       oferta: 5,
@@ -203,10 +204,10 @@ export class ProductosComponent implements OnInit {
     },
     {
       id: 15,
-      nombre: 'Kit Pinza Pelacables Automatica Ajustable + Terminales Tbcin',
+      nombre: 'Kit Pinza Pelacables Automatica',
       descripcion: 'KIT PINZA PELA CABLES AUTOMATICA PROFESIONAL + TERMINALES - TBCIN. Realiza un corte radial y la extracción del aislamiento del cable evitando el desmechado de los hilos de cobre. También funciona como alicate corta cables. Incluye kit de terminales y precintos. Presentación en blister con gancho para colgar, ideal para transportar.',
       precio: 44905,
-      img: './assets/pinzapelacables15.webp',
+      img: './assets/pinzapelacables15.png',
       disponibilidad: true,
       categoria: 'Herramientas Manuales',
       oferta: 0,
@@ -216,10 +217,10 @@ export class ProductosComponent implements OnInit {
     },
     {
       id: 16,
-      nombre: 'Taladro Atornillador Percutor 18v Inalambrico 2 Baterias Color Naranja Frecuencia 50',
+      nombre: 'Taladro Atornillador Percutor 18v Inalambrico',
       descripcion: 'El Taladro Atornillador Percutor Inalámbrico Lusqtoff 18V es una herramienta potente y versátil, ideal para bricolaje y reparaciones. Cuenta con mandril autoajustable, 18+1 niveles de torque, mango antideslizante, luz LED, indicador de batería, dos baterías de litio, cargador, punta Phillips y maletín. Ofrece hasta 1350 RPM y 2.0A de potencia, combinando comodidad y alto rendimiento.',
       precio: 115358,
-      img: './assets/taladroatornillador16.webp',
+      img: './assets/taladroatornillador16.png',
       disponibilidad: true,
       categoria: 'Herramienta Electricas e Inalambricas',
       oferta: 0,
@@ -229,10 +230,10 @@ export class ProductosComponent implements OnInit {
     },
     {
       id: 17,
-      nombre: 'Escalera Articulada Black+decker 4x4 16 Escalones',
+      nombre: 'Escalera Articulada Black+decker',
       descripcion: 'Escalera articulada Black and decker 4x4 16 escalones FS >13 posiciones en 1 escalera >Extremadamente versátil, ligera y fácil de transportar. >Se puede utilizar como escalera trasera, escalera de pintor en forma de A, andamio y otras 10 posiciones. >Sus juntas son autoblocantes. >Posee extensión lateral para mayor estabilidad, peldaños antideslizantes con mayor área de contacto, zapatas engomadas. >Carga máxima de trabajo es de 150 Kg. >Material de aluminio y polipropileno.',
       precio: 232369,
-      img: './assets/escalera17.webp',
+      img: './assets/escalera17.png',
       disponibilidad: true,
       categoria: 'Herramientas Manuales',
       oferta: 15,
@@ -242,10 +243,10 @@ export class ProductosComponent implements OnInit {
     },
     {
       id: 18,
-      nombre: 'Tornillo Autoperforante Techo 14 X 2 Bolsa X 100 Un Gramabi Con Arandela Chapa Goma Vulcanizada Punta Mecha Metal Madera',
+      nombre: 'Tornillo Autoperforante Techo 14 X 2 Bolsa X 100',
       descripcion: 'Punta mecha con arandela vulcanizada. Son utilizados para montajes de techos, tinglados, galpones, silos, carrocerías, unión de perfiles, carpintería metálica y viviendas industrializadas. Fabricados en acero cincado, estos tornillos autoperforantes de 6.3 mm de diámetro y cabeza hexagonal garantizan una fijación segura y duradera en superficies como chapa y perfiles metálicos. La forma de la rosca es aterrajadora, lo que facilita su instalación. Se calculan 3 tornillos por m² de chapa.',
       precio: 8910,
-      img: './assets/tornillo18.webp',
+      img: './assets/tornillo18.png',
       disponibilidad: true,
       categoria: 'Herramientas Manuales',
       oferta: 10,
@@ -255,10 +256,10 @@ export class ProductosComponent implements OnInit {
     },
     {
       id: 19,
-      nombre: 'Kit Cintas Aisladoras Tacsa 6 Rollos De 6 Colores 10 Metros',
+      nombre: 'Kit Cintas Aisladoras Tacsa 6 Rollos De 10 Metros',
       descripcion: 'Cada Kit Consta de: •1 Rollo de Cinta Aisladora Tacsa 10 Metros Amarilla •1 Rollo de Cinta Aisladora Tacsa 10 Metros Azul •1 Rollo de Cinta Aisladora Tacsa 10 Metros Roja •1 Rollo de Cinta Aisladora Tacsa 10 Metros Verde •1 Rollo de Cinta Aisladora Tacsa 10 Metros Blanca •1 Rollo de Cinta Aisladora Tacsa 10 Metros Negra',
       precio: 13853,
-      img: './assets/cinta19.webp',
+      img: './assets/cinta19.png',
       disponibilidad: true,
       categoria: 'Herramientas Manuales',
       oferta: 10,
@@ -268,10 +269,10 @@ export class ProductosComponent implements OnInit {
     },
     {
       id: 20,
-      nombre: 'Cinta Métrica 5 Metros Con Freno Evel 525 Premiumblok -25mm',
+      nombre: 'Cinta Métrica 5 Metros Con Freno Evel 525 ',
       descripcion: 'Esta cinta métrica tiene un fleje de acero de 25 mm, carcasa plástica resistente y diseño ergonómico. Incluye gancho magnético, botón de tranca, puntera corrediza y accesorios para cinturón y mano, lo que la hace precisa, segura y fácil de transportar. Ideal para trabajos exigentes.',
       precio: 12210,
-      img: './assets/cintametrica20.webp',
+      img: './assets/cintametrica20.png',
       disponibilidad: true,
       categoria: 'Herramientas Manuales',
       oferta: 0,
@@ -285,16 +286,31 @@ export class ProductosComponent implements OnInit {
   ]
 
   productosFiltrados: Productos[] = []
+  productosBuscados: Productos[] = []
+  busc: string = '';
 
 
   constructor(private carritoService: CarritoService,
     private favoritoService: FavoritoService,
-    private ofetrasService: OfertasService
+    private ofetrasService: OfertasService,
+    private buscadorService: BuscadorService
   ) { }
 
   ngOnInit(): void {
     this.ofetrasService.cargarProductos(this.Productos);
+
+    this.buscadorService.filtro$.subscribe(valor => {
+      this.busc = valor;
+      this.buscarProductos();
+    })
+
+
   }
+
+
+
+
+
   agregar(producto: Productos) {
     this.carritoService.agregarAlCarrito(producto);
     alert('Producto agregado al carrito');
@@ -335,6 +351,7 @@ export class ProductosComponent implements OnInit {
 
 
 
+
   }
   searchTerm: string = '';
   selectedCategory: string = '';
@@ -358,6 +375,7 @@ export class ProductosComponent implements OnInit {
     this.maxprecio = null;
   }
 
+
   get filteredProducts(): Productos[] {
     return this.Productos.filter(p => (
       this.searchTerm === '' || p.nombre.toLocaleLowerCase().includes(this.searchTerm.toLocaleLowerCase())
@@ -367,6 +385,37 @@ export class ProductosComponent implements OnInit {
       (this.minprecio === null || p.precio >= this.minprecio) &&
       (this.maxprecio === null || p.precio <= this.maxprecio))
   }
+  buscarProductos() {
+    if (!this.busc || this.busc.trim() === '') {
+      // si no hay búsqueda, muestro filtrados (no todos)
+      this.filteredProducts;
+    } else {
+      const termino = this.busc.toLowerCase();
+
+      this.productosBuscados = this.filteredProducts.filter(p =>
+        p.nombre.toLowerCase().includes(termino) ||
+        p.descripcion.toLowerCase().includes(termino) ||
+        p.marca.toLowerCase().includes(termino) ||
+        p.categoria.toLowerCase().includes(termino)
+      );
+    }
+  }
+  get productosParaMostrar(): Productos[] {
+    // si hay productos buscados, muestro esos
+    if (this.productosBuscados && this.productosBuscados.length > 0) {
+      return this.productosBuscados;
+    }
+
+
+    // si no hay búsqueda, muestro los filtrados
+    return this.filteredProducts;
+
+
+
+  }
+
+
+
 
 
 

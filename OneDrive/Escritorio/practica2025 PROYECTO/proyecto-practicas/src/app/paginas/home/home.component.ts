@@ -24,17 +24,17 @@ export class HomeComponent implements OnInit {
   lgos=[
     {
       id:1,
-      img:"./assets/ofertalogo.webp",
+      img:"./assets/ofertalogo.png",
       esc:"¡Aprovecha las diferentes ofertas!",
     },
     {
       id:2,
-      img:"./assets/logotarjeta.jpg",
+      img:"./assets/logotarjeta.png",
       esc:"Elegi tu metodo de pago favorito",
     },
     {
       id:3,
-      img:"./assets/cajalogo.jpg",
+      img:"./assets/cajalogo.png",
       esc:"Recibi los productos en menos de 48hs",
     },
   ]
