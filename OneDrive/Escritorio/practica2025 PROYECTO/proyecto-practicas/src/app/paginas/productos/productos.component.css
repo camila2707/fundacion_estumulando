@@ -94,6 +94,7 @@ select{
 .filtros{
   width: 100%;
   display: flex;
+  justify-content: center;
   
    height: 70px;
  
