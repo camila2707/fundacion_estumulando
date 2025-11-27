@@ -40,16 +40,16 @@
     >
       <img
         class="img"
-        [src]="oferta.img"
-        alt="{{ oferta.nombre }}"
+         [src]="'http://localhost/api_proyecto/public/uploads/' + oferta.Imagen"
+        alt="{{ oferta.Nombre }}"
         width="100%"
         height="100%"
       />
       <div class="textBox">
-        <p class="text head">{{ oferta.nombre }}</p>
+        <p class="text head">{{ oferta.Nombre }}</p>
         <h1>{{ oferta.oferta }}%</h1>
         <p>Descuento con tarjetas bancarias</p>
-        <p class="text price">{{ oferta.precio | currency }}</p>
+        <p class="text price">{{ oferta.Precio | currency }}</p>
       </div>
     </div>
   </div>

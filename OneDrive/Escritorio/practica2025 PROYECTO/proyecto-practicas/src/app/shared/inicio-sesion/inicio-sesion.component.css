@@ -1,7 +1,7 @@
 .contenedor {
   width: 100%;
   justify-content: center;
-  margin-left: 35%;
+  margin-left: 40%;
   margin-top: 5%;
 }
 .form-container {
@@ -137,4 +137,9 @@
 .google-icon {
   font-size: 18px;
   margin-bottom: 1px;
+}
+.btn{
+  background-color:  rgb(255, 149, 0);
+  color: #000;
+  border-radius: 10px;
 }

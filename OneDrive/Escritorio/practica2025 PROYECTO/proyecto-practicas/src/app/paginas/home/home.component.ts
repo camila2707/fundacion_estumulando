@@ -3,6 +3,7 @@ import { Component, NgModule, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { OfertasService } from '../../servicios/ofertas.service';
 import { Productos } from '../../model/producto.model';
+import { ProductService } from '../../servicios/product.service';
 
 
 
@@ -14,44 +15,42 @@ import { Productos } from '../../model/producto.model';
   styleUrl: './home.component.css'
 })
 export class HomeComponent implements OnInit {
-  constructor(private ofertasService: OfertasService) { }
+
   productosEnOferta: Productos[] = [];
+
+  constructor(private productService: ProductService) { }
+
   ngOnInit(): void {
-    this.ofertasService.ofertas$.subscribe(productos => {
-      this.productosEnOferta = productos;
+    this.cargarOfertas();
+  }
+
+  cargarOfertas() {
+    this.productService.obtenerProductos().subscribe({
+      next: (productos) => {
+        // Filtrar solo los productos con oferta 
+        this.productosEnOferta = productos.filter(p => p.oferta >0);
+      },
+      error: (err) => {
+        console.error("Error cargando productos:", err);
+      }
     });
   }
-  lgos=[
+
+  lgos = [
     {
-      id:1,
-      img:"./assets/ofertalogo.png",
-      esc:"¡Aprovecha las diferentes ofertas!",
+      id: 1,
+      img: "./assets/ofertalogo.png",
+      esc: "¡Aprovecha las diferentes ofertas!",
     },
     {
-      id:2,
-      img:"./assets/logotarjeta.png",
-      esc:"Elegi tu metodo de pago favorito",
+      id: 2,
+      img: "./assets/logotarjeta.png",
+      esc: "Elegí tu método de pago favorito",
     },
     {
-      id:3,
-      img:"./assets/cajalogo.png",
-      esc:"Recibi los productos en menos de 48hs",
+      id: 3,
+      img: "./assets/cajalogo.png",
+      esc: "Recibí los productos en menos de 48hs",
     },
-  ]
-  
-
-
-
-
-
- 
+  ];
 }
-
-
-
-
-
-
-
-
-

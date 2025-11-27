@@ -1,8 +1,8 @@
 <div class="card-container">
   <ng-container *ngIf="productosEnOferta.length > 0">
     <ng-container *ngFor="let item of productosEnOferta">
-      <div *ngIf="item.disponibilidad" class="card">
-        <label title="Star" class="star" (click)="agregarF(item)">
+      <div  class="card">
+        <label title="Star" class="star" (click)="agregarfavorito(item)">
           <input id="star-checkbox" class="checkbox" type="checkbox" />
           <div class="svg-container">
             <svg
@@ -43,17 +43,17 @@
          
         </label>
          <h2 class="off">{{item.oferta}}% OFF</h2>
-        <img [src]="item.img" alt="{{ item.nombre }}" class="card-img-top" />
+        <img  [src]="'http://localhost/api_proyecto/public/uploads/' + item.Imagen" alt="{{ item.Nombre }}" class="card-img-top" />
         <div class="card-body">
-          <h5 class="card-title">{{ item.nombre }}</h5>
-          <h4 class="card-text">{{ item.precio | currency }}</h4>
+          <h5 class="card-title">{{ item.Nombre }}</h5>
+          <h4 class="card-text">{{ item.Precio | currency }}</h4>
           <button (click)="mostrardescripcion(item)" class="botonDC">
             Ver descripción
           </button>
 
           <!-- Mostrar solo si es el producto seleccionado -->
           <p *ngIf="productoSeleccionado === item">
-            <strong>Descripción:</strong> {{ item.descripcion }}
+            <strong>Descripción:</strong> {{ item.Descripcion }}
           </p>
 
           <button (click)="mostrarcaracteristicas(item)" class="botonDC">

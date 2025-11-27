@@ -1,19 +1,29 @@
 .contenedor{
-    width: 100%;
+   width: 100%;
+  justify-content: center;
+  margin-left: 40%;
+  margin-top: 5%;
     
 }
 .formulario{
-    width: 30%;
-    align-items: center;
-    height: auto;
-    margin-left: 35%;
-    margin-top: 5%;
-    border-radius: 5px;
-   padding: 30px;
+ width: 350px;
+  height: auto;
+  
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  border-radius: 10px;
+  box-sizing: border-box;
+  padding: 20px 30px;
    
     
 
 }
+
+.btn{
+  background-color:  rgb(255, 149, 0);
+  color: #000;
+  border-radius: 10px;
+}
+
 .formulario label{
     padding-top: 10px;
 }
@@ -23,7 +33,7 @@
 }
 .formulario button {
     margin-top: 10px ;
-    margin-left: 35%;
+   
     
     
 }

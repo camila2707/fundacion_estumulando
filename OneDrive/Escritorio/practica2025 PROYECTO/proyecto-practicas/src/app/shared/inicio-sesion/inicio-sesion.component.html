@@ -1,58 +1,51 @@
 <div class="contenedor">
-  <form [formGroup]="formularioInicio">
-    <div class="form-container">
-      <p class="title">¡Bienvenido!</p>
-      <form class="form">
+  <div class="form-container">
+    <h2 class="title">Iniciar Sesión</h2>
+
+    <form (ngSubmit)="iniciarSesion()">
+      <!-- Correo electrónico -->
+      <div class="mb-3">
+        <label for="Email" class="form-label">Correo electrónico</label>
         <input
-          
-          id="nombre"
-          formControlName="nombre"
+          type="Email"
+          id="Email"
+          name="Email"
           class="form-control"
-          placeholder="Nombre de usuario"
-
+          [(ngModel)]="usuario.Email"
+          required
         />
+      </div>
 
-        <div
-          *ngIf="
-            formularioInicio.get('nombre')?.touched &&
-            formularioInicio.get('nombre')?.invalid
-          "
-          class="form-text text-danger"
-        >
-          El correo es obligatorio
-        </div>
-
+      <!-- Contraseña -->
+      <div class="mb-3">
+        <label for="password" class="form-label">Contraseña</label>
         <input
           type="password"
-          id="contra"
-          formControlName="contra"
+          id="password"
+          name="password"
           class="form-control"
-          placeholder="Contraseña"
-        
+          [(ngModel)]="usuario.Password"
+          required
         />
-
-        <div
-          *ngIf="
-            formularioInicio.get('contra')?.touched &&
-            formularioInicio.get('contra')?.invalid 
-          "
-          class="form-text text-danger"
-        >
-          La contraseña es obligatoria
-        </div>
-
-        <p class="page-link">
-          <span class="page-link-label">¿Olvidaste tu contraseña?</span>
-        </p>
-        <button class="form-btn">Iniciar sesion</button>
-      </form>
-      <p class="sign-up-label">
-        ¿No tienes cuenta?<span class="sign-up-link" routerLink="/registro"> Registrarse</span>
-      </p>
-      <div class="buttons-container">
-        
-        
       </div>
+
+      <!-- Botón de envío -->
+      <div class="d-grid">
+        <button type="submit" class="btn">Ingresar</button>
+      </div>
+
+      <!-- Mensaje de error -->
+      <p *ngIf="error" class="text-danger text-center mt-3">
+        {{ error }}
+      </p>
+    </form>
+
+    <!-- Enlace al registro -->
+    <div class="text-center mt-3">
+      <small>
+        ¿No tenés cuenta?
+        <a routerLink="/registro">Registrate aquí</a>
+      </small>
     </div>
-  </form>
+  </div>
 </div>

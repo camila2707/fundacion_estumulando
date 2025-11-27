@@ -1,66 +1,82 @@
 import { CommonModule, NgFor, NgIf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { Productos } from '../../model/producto.model';
 import { CarritoService } from '../../servicios/carrito.service';
 import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-carrito',
-  imports: [CommonModule,NgFor, NgIf],
-  standalone:true,
+  standalone: true,
+  imports: [CommonModule, NgFor, NgIf],
   templateUrl: './carrito.component.html',
   styleUrl: './carrito.component.css'
 })
-export class CarritoComponent implements OnInit{
-  ProductosEnCarrito:{producto:Productos;cantidad : number}[]=[]
+export class CarritoComponent implements OnInit {
 
-  constructor (private carritoService : CarritoService,/*se llaman los servicios */
-    private router:Router
-  ){}
+  carrito: any[] = [];
+  envio: number = 1500;
+  total: number = 0;
 
-    ngOnInit():void{
-      this.carritoService.carrito$.subscribe((producto)=>{
-        this.ProductosEnCarrito=producto;
-      })
+  constructor(
+    public carritoService: CarritoService,
+    private router: Router
+  ) {}
 
-    }
-    agregarCantidad(index: number){/*funcion para agregar cantidad */
-      this.ProductosEnCarrito[index].cantidad++;
-      
-    }
-  
-    quitarCantidad(index: number){/*funcion para restar cantidad */
-      if(this.ProductosEnCarrito[index].cantidad>1){
-        this.ProductosEnCarrito[index].cantidad--;
+  ngOnInit(): void {
+    this.cargarCarrito();
+  }
+
+  cargarCarrito(): void {
+    this.carritoService.obtenerCarrito().subscribe({
+      next: (items: any[]) => {
+        this.carrito = items || [];
+        this.calcularTotal();
+      },
+      error: () => {
+        this.carrito = [];
+        this.total = 0;
       }
-    }
-  
-    eliminarProducto(productoId: number){/*funcion para eliminar productos del carrito */
-      this.carritoService.eliminarDelCarrito(productoId);
-    }
-  
-    vaciarCarrito(){/*funcion para vaciar el carrito */
-      this.carritoService.vaciarCarrito()
-    }
-  
-    /*realizarCompra(){
-      alert('Compra Realizada')
-      this.vaciarCarrito()
-    }*/
-   
-    irAFormulario(){
-      //redirige al usuariio a la ruta '/compra', donde se me encuentra el formulario 
-     this.router.navigate(['/compra'])
-    }
+    });
+  }
 
-    //calcular el total del carrito de compras
-    calcularTotal():number{
-      //recorre el arreglo de productos en el carrito y suma el resultado de (precio*cantidad) de cada item
-      return this.ProductosEnCarrito.reduce((total,item)=>{
-        return total + item.producto.precio*item.cantidad
-      },0); // el acumulador total comienza en 0
-    }
-   
-  
+  calcularTotal(): void {
+    this.total = this.carrito.reduce(
+      (sum, item) => sum + Number(item.subtotal),
+      0
+    );
+  }
 
+  cambiarCantidad(idDetalleCarrito: number, event: any): void {
+    const nuevaCantidad = Number(event.target.value);
+
+    this.carritoService.actualizarCantidad(idDetalleCarrito, nuevaCantidad).subscribe({
+      next: (res: any) => {
+        const items = res.carrito ?? res ?? [];
+        this.carrito = items;
+        this.calcularTotal();
+      }
+    });
+  }
+
+  eliminar(idDetalleCarrito: number): void {
+    this.carritoService.eliminarProducto(idDetalleCarrito).subscribe({
+      next: (res: any) => {
+        const items = res.carrito ?? res ?? [];
+        this.carrito = items;
+        this.calcularTotal();
+      }
+    });
+  }
+
+  vaciarCarrito(): void {
+    this.carritoService.vaciarCarrito().subscribe({
+      next: () => {
+        this.carrito = [];
+        this.total = 0;
+      }
+    });
+  }
+
+  irACompra(): void {
+    this.router.navigate(['/compra']);
+  }
 }

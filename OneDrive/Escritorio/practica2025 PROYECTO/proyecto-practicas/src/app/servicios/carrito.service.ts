@@ -1,64 +1,150 @@
-import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
-import { Productos } from '../model/producto.model';
+import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
+import { BehaviorSubject, Observable, tap } from 'rxjs';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { isPlatformBrowser } from '@angular/common';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CarritoService {
-  private carritoSubject = new BehaviorSubject <{producto: Productos ; cantidad : number}[]>([]);
 
-  carrito$=this.carritoSubject.asObservable()
+  private apiUrl = 'http://localhost/api_proyecto/public/carrito';
 
-  agregarAlCarrito(producto:Productos){/*funcion para agregar al carrito */
-    const productos=this.carritoSubject.getValue();
-    const encontrado=productos.find(p => p.producto.id===producto.id);/*busca el producto por su ID */
+  private carritoSubject = new BehaviorSubject<any[]>([]);
+  carrito$ = this.carritoSubject.asObservable();
+
+  constructor(
+    private http: HttpClient,
+    @Inject(PLATFORM_ID) private platformId: Object
+  ) { }
+
+  setCarrito(items: any[]) {
+    this.carritoSubject.next(items);
+  }
+
+  /* ============================================
+     HEADERS CON TOKEN
+  ============================================ */
+  private getHeaders() {
+    const token = localStorage.getItem('token') ?? '';
+
+    return {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      })
+    };
+  }
 
 
-    if(encontrado){
-      encontrado.cantidad++/*cuando encuentre la cantidad o producto le va a ir sumando la cantidad */
-       
-    }else{
-      this.carritoSubject.next([...productos,{producto,cantidad:1}])
+  /* ============================================
+     OBTENER CARRITO
+  ============================================ */
+  obtenerCarrito(): Observable<any[]> {
+    // Llama al endpoint GET /carrito
+    return this.http.get<any[]>(this.apiUrl, this.getHeaders());
+  }
+  
+
+  cargarCarrito(): void {
+    
+
+    if (!isPlatformBrowser(this.platformId)) return; // SSR safe
+
+    const token = localStorage.getItem('token');
+    if (!token) {
+      console.warn('No hay token, no se carga carrito');
+      return;
     }
 
-  }
-
-  eliminarDelCarrito(productoId:number){/**funcion para eliminar del carrito */
-    const productos=this.carritoSubject.getValue().filter(p=>p.producto.id !== productoId)/**utiliza un filtro para filtrar los productos por su ID */
-    this.carritoSubject.next(productos)
-
-  }
-
-  vaciarCarrito(){/**funcion para vaciar el carrito */
-    this.carritoSubject.next([])
-  }
-
-  //motodo para actualizar la cantidad de un producto en el carrito
-  agregarCantidad(productoID:number, nuevaCantidad:number){
-    //recorremos el carrito y actualizamos la cantidad del producto con el ID dado
-    const productos= this.carritoSubject.getValue().map(item=>{
-      if(item.producto.id===productoID){
-        //retornamos una copia del producto con la nueva cantidad
-        return{... item,cantidad:nuevaCantidad}
+    this.obtenerCarrito().subscribe({
+      next: items => {
+        // Actualiza el observable con los items recibidos.
+        this.carritoSubject.next(items);
+         console.log("TOKEN ENVIADO:", localStorage.getItem('token'));
+      },
+      error: () => {
+        // Si falla, se vacía para evitar inconsistencias.
+        this.carritoSubject.next([]);
       }
-      return item
-    })
-    //emitimos el nuevo estado del carrito
-    this.carritoSubject.next(productos);
-  }
-
-  //metodo para obtener los productos del carrito como un arreglo
-  obtenerProductos():{producto:Productos}[]{
-    return this.carritoSubject.getValue();
-  }
-  //metodo para calcular el total a pagar (precio*cantidad de cada producto)
-  obtenerTotal():number{
-    const productos=this.carritoSubject.getValue();
-    //usamos reduce para sumar los subtotales de cada producto
-    return productos.reduce((total,item)=>total + item.producto.precio*item.cantidad,0);
-  }
+    });
+  }/*
+  cargarCarrito(): void {
+    this.obtenerCarrito().subscribe({
+      next: items => {
+        // Actualiza el observable con los items recibidos.
+        this.carritoSubject.next(items);
+      },
+      error: () => {
+        // Si falla, se vacía para evitar inconsistencias.
+        this.carritoSubject.next([]);
+      }
+    });
+  }*/
 
 
-  constructor() { }
+
+  /* ============================================
+     AGREGAR PRODUCTO
+     POST /carrito/agregar
+  ============================================ */
+  agregarAlCarrito(producto: any): Observable<any> {
+    return this.http.post<any>(
+      `${this.apiUrl}/agregar`,
+      {
+        product_id: producto.Id_productos,
+        cantidad: 1
+      },
+      this.getHeaders()
+    ).pipe(
+      tap(() => this.cargarCarrito())
+    );
+  }
+
+
+  /* ============================================
+     ACTUALIZAR CANTIDAD
+     PUT /carrito/{id}
+  ============================================ */
+  actualizarCantidad(idDetalleCarrito: number, cantidad: number): Observable<any> {
+    return this.http.put<any>(
+      `${this.apiUrl}/${idDetalleCarrito}`,
+      { cantidad },
+      this.getHeaders()
+    ).pipe(
+      tap((r: any) => {
+        if (r?.data) this.carritoSubject.next(r.data);
+      })
+    );
+  }
+
+
+  /* ============================================
+     ELIMINAR ITEM
+     DELETE /carrito/{id}
+  ============================================ */
+  eliminarProducto(idDetalleCarrito: number): Observable<any> {
+    return this.http.delete<any>(
+      `${this.apiUrl}/${idDetalleCarrito}`,
+      this.getHeaders()
+    ).pipe(
+      tap((r: any) => {
+        if (r?.data) this.carritoSubject.next(r.data);
+      })
+    );
+  }
+
+
+  /* ============================================
+     VACIAR CARRITO
+     DELETE /carrito
+  ============================================ */
+  vaciarCarrito(): Observable<any> {
+    return this.http.delete<any>(
+      this.apiUrl,
+      this.getHeaders()
+    ).pipe(
+      tap(() => this.carritoSubject.next([]))
+    );
+  }
 }

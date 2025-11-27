@@ -7,7 +7,7 @@
     <div class="card">
       
         <input type="checkbox" id="star" />
-        <label for="star" (click)="eliminarF(item.producto.id)">
+        <label for="star" (click)="eliminarF(item.producto.Id_productos)">
           <svg viewBox="0 0 24 24">
             <path
               d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
@@ -16,20 +16,20 @@
         </label>
     
       <img
-        [src]="item.producto.img"
-        alt="{{ item.producto.nombre }}"
+        [src]="item.producto.Imagen"
+        alt="{{ item.producto.Nombre }}"
         class="card-img-top"
       />
       <div class="card-body">
-        <h5 class="card-title">{{ item.producto.nombre }}</h5>
-        <h4 class="card-text">{{ item.producto.precio | currency }}</h4>
+        <h5 class="card-title">{{ item.producto.Nombre }}</h5>
+        <h4 class="card-text">{{ item.producto.Precio | currency }}</h4>
         <button (click)="mostrardescripcion(item.producto)" class="botonDC">
           Ver descripción
         </button>
 
         <!-- Mostrar solo si es el producto seleccionado " -->
         <p *ngIf="productoSeleccionado === item.producto">
-          <strong>Descripción:</strong> {{ item.producto.descripcion }}
+          <strong>Descripción:</strong> {{ item.producto.Descripcion }}
         </p>
 
         <button (click)="mostrarcaracteristicas(item.producto)" class="botonDC">

@@ -1,9 +1,9 @@
 export interface Productos{
-    id:number;
-    nombre:string;
-    descripcion:string;
-    precio:number;
-    img:string;
+    Id_productos:number;
+    Nombre:string;
+    Descripcion:string;
+    Precio:number;
+    Imagen:string;
     disponibilidad: boolean;
     cantidad?:number;
     categoria:string;
